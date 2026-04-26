@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent {
   errorMessage = '';
   isLoading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   onSubmit() {
     if (!this.name || !this.date) {
@@ -41,10 +42,12 @@ export class AppComponent {
         this.name = '';
         this.date = '';
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = 'Failed to add birthday. Please try again.';
         this.isLoading = false;
+        this.cdr.detectChanges();
         console.error(err);
       }
     });
