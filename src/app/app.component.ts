@@ -36,7 +36,7 @@ export class AppComponent {
       date: this.date
     };
 
-    this.http.post('https://birthday-reminder-be.vercel.app/birthdays', payload).subscribe({
+    this.http.post('https://birthday-reminder-be.vercel.app/api/birthdays', payload).subscribe({
       next: (res) => {
         this.successMessage = `Successfully added birthday for ${this.name}!`;
         this.name = '';
