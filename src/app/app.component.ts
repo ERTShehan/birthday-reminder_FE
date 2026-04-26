@@ -45,7 +45,8 @@ export class AppComponent {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        this.errorMessage = 'Failed to add birthday. Please try again.';
+        const serverError = err.error?.error || err.error?.message;
+        this.errorMessage = serverError ? `Error: ${serverError}` : 'Failed to add birthday. Please try again.';
         this.isLoading = false;
         this.cdr.detectChanges();
         console.error(err);
